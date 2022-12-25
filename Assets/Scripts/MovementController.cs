@@ -7,6 +7,9 @@ public class MovementController : MonoBehaviour
     // movement speed
     public float speed = 5.0f;
 
+    // rotation smoothness
+    public float rotationSmoothness = 10.0f;
+
     // Update is called once per frame
     void Update()
     {
@@ -21,5 +24,15 @@ public class MovementController : MonoBehaviour
 
         // apply movement
         transform.position += movement * speed * Time.deltaTime;
+
+        // if there is no input, don't change the rotation
+        if (movement.magnitude > 0)
+        {
+            // get the target rotation
+            Quaternion targetRotation = Quaternion.LookRotation(movement);
+
+            // smooth out the rotation using Quaternion.Lerp
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSmoothness);
+        }
     }
 }
