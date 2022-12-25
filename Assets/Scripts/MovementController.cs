@@ -11,7 +11,7 @@ public class MovementController : MonoBehaviour
     public float rotationSmoothness = 10.0f;
 
     //animator 
-    private Animator = animator;
+    private Animator animator;
 
     void Start() 
     {
@@ -43,6 +43,10 @@ public class MovementController : MonoBehaviour
 
             // smooth out the rotation using Quaternion.Lerp
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSmoothness);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
         }
     }
 }
