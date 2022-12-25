@@ -37,16 +37,21 @@ public class MovementController : MonoBehaviour
         // if there is no input, don't change the rotation
         if (movement.magnitude > 0)
         {
-            animator.SetBool("isWalking", true); 
+            
             // get the target rotation
             Quaternion targetRotation = Quaternion.LookRotation(movement);
 
             // smooth out the rotation using Quaternion.Lerp
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSmoothness);
         }
-        else
+        if(verticalInput != 0|| horizontalInput != 0)
+        {
+            animator.SetBool("isWalking", true);
+        } else
         {
             animator.SetBool("isWalking", false);
         }
+        Debug.Log(verticalInput);
+        Debug.Log(horizontalInput);
     }
 }
