@@ -11,7 +11,7 @@ public class MovementController : MonoBehaviour
     void Update()
     {
         // get input for horizontal movement
-        float horizontalInput = Input.GetAxis("Horizontal")
+        float horizontalInput = Input.GetAxis("Horizontal");
 
         // get input for vertical movement
         float verticalInput = Input.GetAxis("Vertical");
