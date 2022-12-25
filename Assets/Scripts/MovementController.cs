@@ -10,7 +10,16 @@ public class MovementController : MonoBehaviour
     // rotation smoothness
     public float rotationSmoothness = 10.0f;
 
-    // Update is called once per frame
+    //animator 
+    private Animator = animator;
+
+    void Start() 
+    {
+
+        animator = GetComponent<Animator>();
+
+    }
+
     void Update()
     {
         // get input for horizontal movement
@@ -28,6 +37,7 @@ public class MovementController : MonoBehaviour
         // if there is no input, don't change the rotation
         if (movement.magnitude > 0)
         {
+            animator.SetBool("isWalking", true); 
             // get the target rotation
             Quaternion targetRotation = Quaternion.LookRotation(movement);
 
