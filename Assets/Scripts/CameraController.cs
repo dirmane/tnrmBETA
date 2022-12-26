@@ -2,24 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraFacedMovement : MonoBehaviour
 {
-    // reference to the character GameObject
-    public GameObject character;
+    public float speed = 5.0f; // The player's movement speed
+    public Transform cameraTransform; // The transform of the camera object
 
-    // offset from the character's position to the camera's position
-    public Vector3 offset;
+    private CharacterController controller; // The Character Controller component attached to the player
+    private Vector3 velocity; // The player's current velocity
 
-    // smooth factor for camera movement
-    public float smoothFactor = 0.5f;
+    void Start()
+    {
+        // Get the Character Controller component attached to the player
+        controller = GetComponent<CharacterController>();
+    }
 
-    // Update is called once per frame
     void Update()
     {
-        // calculate the target position for the camera
-        Vector3 targetPosition = character.transform.position + offset;
+        // Check if the player is pressing the "Forward" or "Backward" buttons
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
 
-        // smoothly move the camera towards the target position
-        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothFactor);
+        // Calculate the player's movement vector based on the camera's rotation
+        Vector3 move = cameraTransform.right * x + cameraTransform.forward * z;
+
+        // Normalize the movement vector
+        move = move.normalized;
+
+        // Update the player's velocity
+        velocity.x = move.x * speed;
+        velocity.z = move.z * speed;
+
+        // Move the player using the Character Controller component
+        controller.Move(velocity * Time.deltaTime);
     }
 }
