@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/kuchnia2.unity
+    guid: 67e6e38baa29953439d97b2e1647fe94
   m_configObjects: {}
