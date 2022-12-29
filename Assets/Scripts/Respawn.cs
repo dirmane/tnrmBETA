@@ -10,7 +10,7 @@ public class Respawn : MonoBehaviour
     void Update()
     {
         // Check if the player's y-position is less than the respawn y-position
-        if (transform.position.y < respawnY)
+        if (transform.position.y <= respawnY)
         {
             // The player's y-position is less than the respawn y-position, so respawn them
             transform.position = respawnPoint.position;
